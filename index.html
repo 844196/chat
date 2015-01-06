@@ -48,6 +48,24 @@
     function addMessage(message, date){
       $("#dummy").after('<tr><td>' + date + '</td>' + '<td>' + message + '</td></tr>');
     };
+
+    $(function($){
+      $('#msg').keydown(function(e){
+        if(event.ctrlKey) {
+          if(e.which == 13){
+            clickEvent();
+            return false;
+          }
+        }
+        if(e.metalKey) {
+          if(e.which == 13){
+            clickEvent();
+            return false;
+          }
+        }
+      });
+    });
+
   </script>
 </head>
 <body>
@@ -56,12 +74,12 @@
       <form>
         <fieldset>
           <div id="form" class="form-group">
-            <textarea class="form-control" name="" id="msg" placeholder="ここにメッセージを入力" rows="3" style="width: 100%"></textarea>
+            <textarea class="form-control" name="" id="msg" placeholder="Ctrl+Enterで送信" rows="3" style="width: 100%"></textarea>
           </div>
         </fieldset>
       </form>
       <div class="pull-right">
-        <button class="btn btn-success" name="button" onClick="clickEvent()">Send</button>
+        <button id="sendButton" class="btn btn-success" name="button" onClick="clickEvent()">Send</button>
       </div>
     </div>
   </div>
