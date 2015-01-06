@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>chat</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- milkcocoa -->
+  <script src="http://cdn.mlkcca.com/v0.2.8/milkcocoa.js"></script>
+  <!-- jQuery -->
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <script>
+    var milkcocoa = new MilkCocoa("https://io-wi4lavyhu.mlkcca.com:443");
+    var chatDataStore = milkcocoa.dataStore("chat");
+
+    chatDataStore.query({}).sort("asc").done(function(data){
+      for(var i=0; i < data.length; i++){
+        addMessage(data[i].message, data[i].date);
+      }
+    });
+
+    chatDataStore.on("push",function(data){
+      addMessage(data.value.message, data.value.date);
+    });
+
+    var textArea, board;
+    window.onload = function(){
+      textArea = document.getElementById("msg");
+      board = document.getElementById("board");
+    };
+
+    function clickEvent(){
+      var text = textArea.value;
+      var date = new Date();
+      sendMessage(text, date);
+    };
+
+    function sendMessage(text, date){
+      chatDataStore.push({message : text, date : date},function(data){
+      console.log("送信完了!");
+      textArea.value = "";
+      });
+    };
+
+    function addMessage(message, date){
+      $("#dummy").after('<tr><td>' + date + '</td>' + '<td>' + message + '</td></tr>');
+    };
+  </script>
+</head>
+<body>
+  <div class="jumbotron">
+    <div class="container">
+      <form>
+        <fieldset>
+          <div id="form" class="form-group">
+            <textarea class="form-control" name="" id="msg" placeholder="ここにメッセージを入力" rows="3" style="width: 100%"></textarea>
+          </div>
+        </fieldset>
+      </form>
+      <div class="pull-right">
+        <button class="btn btn-success" name="button" onClick="clickEvent()">Send</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <table class="table table-striped">
+      <tbody id="board">
+        <thead>
+          <tr>
+            <th>送信日時</th>
+            <th>メッセージ</th>
+          </tr>
+        </thead>
+        <tr id="dummy"></tr>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
