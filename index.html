@@ -32,9 +32,27 @@
       board = document.getElementById("board");
     };
 
+    function getLocaldate(){
+      DD = new Date();
+
+      year = DD.getFullYear();
+      mon = DD.getMonth() + 1;
+      dates = DD.getDate();
+      hour = DD.getHours();
+      min = DD.getMinutes();
+      sec = DD.getSeconds();
+
+      mon = ('0' + mon).slice(-2);
+      dates = ('0' + dates).slice(-2);
+      hour = ('0' + hour).slice(-2);
+      sec = ('0' + sec).slice(-2);
+
+      return year + "-" + mon + "-" + dates + " " + hour + ":" + min + ":" + sec;
+    };
+
     function clickEvent(){
       var text = textArea.value;
-      var date = new Date();
+      var date = getLocaldate();
       sendMessage(text, date);
     };
 
