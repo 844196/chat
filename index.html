@@ -71,7 +71,7 @@
     };
 
     function addMessage(message, date){
-      $("#dummy").after('<tr><td>' + date + '</td>' + '<td>' + message + '</td></tr>');
+      $("#dummy").after('<tr><td class="table-date">' + date + '</td>' + '<td>' + message + '</td></tr>');
     };
 
     $(function($){
@@ -103,6 +103,9 @@
     button#sendButton {
       border-color: #fff;
     }
+    .table-date {
+      text-align: center;
+    }
   </style>
 </head>
 <body>
@@ -125,7 +128,7 @@
       <tbody id="board">
         <thead>
           <tr>
-            <th>送信日時</th>
+            <th class="table-date">送信日時</th>
             <th>メッセージ</th>
           </tr>
         </thead>
