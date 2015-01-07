@@ -51,8 +51,14 @@
       return year + "-" + mon + "-" + dates + " " + hour + ":" + min + ":" + sec;
     };
 
+    function imgUrlConvert(url){
+      var r = url.replace(/(https?:\/\/[^\s]*?.(jpe?g|png|gif|bmp))/g, '<img src="$1" \/>');
+      return r;
+    };
+
     function clickEvent(){
       var text = textArea.value;
+      text = imgUrlConvert(text);
       var date = getLocaldate();
       sendMessage(text, date);
     };
