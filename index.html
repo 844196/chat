@@ -12,6 +12,8 @@
   <!-- Bootstrap -->
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
   <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  <!-- Font Awesome licensed under the SIL Open Font License -->
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
   <script>
     var milkcocoa = new MilkCocoa("https://io-wi4mabo4k.mlkcca.com:443");
     var chatDataStore = milkcocoa.dataStore("chat");
@@ -113,14 +115,17 @@
     <div class="container">
       <form>
         <fieldset>
-          <div id="form" class="form-group">
-            <textarea class="form-control" name="" id="msg" placeholder="Ctrl+Enterでも送信できます" rows="3"></textarea>
+          <div class="form-group">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-fw fa-comment"></i></span>
+              <input class="form-control" type="text" placeholder="メッセージ（Ctrl+Enterでも送信できます）" id="msg">
+            </div>
+          </div>
+          <div class="form-group pull-right">
+            <button id="sendButton" class="btn btn-success" name="button" onClick="clickEvent()"><i class="fa fa-fw fa-send"></i>&nbsp;Send</button>
           </div>
         </fieldset>
       </form>
-      <div class="pull-right">
-        <button id="sendButton" class="btn btn-success" name="button" onClick="clickEvent()">Send</button>
-      </div>
     </div>
   </div>
   <div class="container">
